@@ -44,7 +44,7 @@ textarea:focus-visible {
   background-color: transparent;
   color: var(--babypowder);
   border-radius: 0;
-  border-bottom: 10px solid var(--future);
+  border-bottom: 10px solid var(--default);
   margin-bottom: 5rem;
 }
 
@@ -75,24 +75,24 @@ textarea:focus-visible {
 :root {
   --past: #760C05;
   --present: #1C872F;
-  --future: #25A792;
+  --default: #25A792;
   --gunmetal: #223843;
   --babypowder: #FFFFFC;
 }
 
 .past {
-  background-color: #d3d3d3;
-  color: var(--babypowder);
+  background-color: #d3d3d3 !important;
+  color: var(--babypowder) !important;
 }
 
 .present {
-  background-color: #ff6961;
-  color: var(--babypowder);
+  background-color: #ff6961 !important;
+  color: var(--babypowder) !important;
 }
 
 .future {
-  background-color: #77dd77;
-  color: var(--babypowder);
+  background-color: #77dd77 !important;
+  color: var(--babypowder) !important;
 }
 
 /* .saveBtn {
@@ -119,6 +119,10 @@ textarea:focus-visible {
   color: var(--gunmetal);
 }
 
+::placeholder {
+  color: #ddd;
+}
+
 #currentDay {
   font-weight: 900;
 }
@@ -133,6 +137,7 @@ textarea:focus-visible {
   height: 7em;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 5px solid var(--babypowder);
 }
 
 .hour {
@@ -144,13 +149,18 @@ textarea:focus-visible {
   justify-content: center;
   background: none;
   color: var(--babypowder);
-  border: 5px solid var(--future);
-  border-left: 10px solid var(--future);
-  background: var(--future);
+  border: 5px solid var(--default);
+  border-left: 10px solid var(--default);
+  background: var(--default);
 }
 
 .hourRow:first-child .hour, .hourRow:first-child .userInputField , .hourRow:first-child .saveButton {
-  border-top: 10px solid var(--future);
+  border-top: 10px solid var(--default);
+}
+
+.hourRow:first-child {
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
 }
 
 .hourRow:first-child .hour {
@@ -162,7 +172,11 @@ textarea:focus-visible {
 }
 
 .hourRow:last-child .hour, .hourRow:last-child .userInputField , .hourRow:last-child .saveButton {
-  border-bottom: 10px solid var(--future);
+  border-bottom: 10px solid var(--default);
+}
+
+.hourRow:last-child {
+  border-bottom: none;
 }
 
 .hourRow:last-child .hour {
@@ -173,7 +187,6 @@ textarea:focus-visible {
   border-bottom-right-radius: 25px;
 }
 
-
 .userInputField {
   height: 100%;
   width: 75%;
@@ -181,7 +194,7 @@ textarea:focus-visible {
   align-items: flex-start;
   background: none;
   color: var(--babypowder);
-  border: 5px solid var(--future);
+  border: 5px solid var(--default);
   background: var(--gunmeta);
   padding: 1em;
   font-weight: 900;
@@ -195,9 +208,9 @@ textarea:focus-visible {
   justify-content: center;
    background: none;
   color: var(--babypowder);
-  border: 5px solid var(--future);
-  border-right: 10px solid var(--future);
-  background: var(--future);
+  border: 5px solid var(--default);
+  border-right: 10px solid var(--default);
+  background: var(--default);
 }
 
 .saveButton i {
