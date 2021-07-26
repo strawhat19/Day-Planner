@@ -8,10 +8,14 @@
 var hours = [];
 var currentDay = $('#currentDay');
 var hourRowContainer = $('.hourRowsContainer');
+// var time ="Hello";
+// var timeRowTest = $(`<div class="col">${time}</div>`);
+
+// hourRowContainer.append(timeRowTest);
 
 // -----------------------------------Generating Dynamic Hour Rows -------------------------------- //
 // Hours in Work Day
-var timeFormat = 'h A';
+var timeFormat = 'h a';
 // var rightNow = moment().format(timeFormat);
 var rightNow = moment();
 var startDay = moment('09', timeFormat).format(timeFormat); // Getting 9am as starting the day
@@ -32,13 +36,22 @@ if (startDay2.isBefore(rightNow)) {
 
 // Storing hours of day in Array
 var workDayHours = [startDay,tenAm,elevenAm,twelvePm,onePm,twoPm,threePm,fourPm,endDay];
+// var [startTime,,,,,,,,endTime,...rest] = workDayHours;
+var [startTime,,,,,,,,endTime,...rest] = workDayHours;
+console.log(startTime + ' ' + endTime);
+console.log(rest);
 
 // Creating dynamic rows for each Hour
 workDayHours.forEach(hour => {
-    var hourRow = $('<div class="hourRow">');
+    var hourRow = $(`<div class="hourRow">
+                        <span class="hour">${hour}</span>
+                    </div>`);
     hourRow.attr('data-value',hour);
-    hourRow.html(hour);
+    // var input = $('textarea')
+    hourRow.append($('<input class="userInputField" type="textarea">'));
+    hourRow.append('<button class="saveButton"><i class="fas fa-save">');
     hourRowContainer.append(hourRow);
+    
     // var hourTimeValue = hourRow.html().split(' ');
     // console.log(hourTimeValue[0]);
 

@@ -2,25 +2,49 @@ body {
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
   line-height: 1;
-  background: #000;
-  color: #fff;
+  background: var(--gunmetal);
+  color: var(--babypowder);
+
 }
 
 textarea {
+  font-weight: 900;
   background: transparent;
   border: none;
   resize: none;
-  color: white;
-  border-left: 1px solid white;
+  outline: none;
+  border-left: 1px solid var(--babypowder);
+  color: var(--gunmetal) !important;
+  background: var(--gunmetal) !important;
   padding: 10px;
 }
 
+textarea:focus-visible {
+  border: none;
+  resize: none;
+  outline: none;
+}
+
+:focus-visible {
+  outline: -webkit-focus-ring-color auto 1px;
+  outline-color: -webkit-focus-ring-color;
+  outline-style: auto;
+  outline-width: 0px;
+}
+
+.saveButton:focus {
+  outline: -webkit-focus-ring-color auto 1px;
+  outline-color: -webkit-focus-ring-color;
+  outline-style: auto;
+  outline-width: 0px;
+}
+
 .jumbotron {
-  text-align: center !important;
+  text-align: center;
   background-color: transparent;
-  color: white;
+  color: var(--babypowder);
   border-radius: 0;
-  border-bottom: 10px solid white;
+  border-bottom: 10px solid var(--future);
   margin-bottom: 5rem;
 }
 
@@ -33,7 +57,9 @@ textarea {
   border-radius: 15px;
 }
 
-.row {
+/* Commented these out, put my own styles in  */
+
+/* .row {
   white-space: pre-wrap;
   height: 80px;
   border-top: 1px solid white;
@@ -43,24 +69,33 @@ textarea {
   background-color: #ffffff;
   color: #000000;
   border-top: 1px dashed #000000;
+} */
+
+
+:root {
+  --past: #760C05;
+  --present: #1C872F;
+  --future: #25A792;
+  --gunmetal: #223843;
+  --babypowder: #FFFFFC;
 }
 
 .past {
   background-color: #d3d3d3;
-  color: white;
+  color: var(--babypowder);
 }
 
 .present {
   background-color: #ff6961;
-  color: white;
+  color: var(--babypowder);
 }
 
 .future {
   background-color: #77dd77;
-  color: white;
+  color: var(--babypowder);
 }
 
-.saveBtn {
+/* .saveBtn {
   border-left: 1px solid black;
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
@@ -71,4 +106,100 @@ textarea {
 .saveBtn i:hover {
   font-size: 20px;
   transition: all 0.3s ease-in-out;
+} */
+
+
+/* Begin Custom CSS */
+
+/* Imported Montserrat,  Stix Two Math, Lexend*/
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100;300;400;500;600;700;800&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=STIX+Two+Math&display=swap');
+
+::selection {
+  background: var(--babypowder);
+  color: var(--gunmetal);
+}
+
+#currentDay {
+  font-weight: 900;
+}
+
+.hourRowsContainer {
+  padding-bottom: 7em;
+}
+
+.hourRow {
+  display: flex;
+  /* width: 100%; */
+  height: 7em;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hour {
+  height: 100%;
+  font-weight: 900;
+  width: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  color: var(--babypowder);
+  border: 5px solid var(--future);
+  border-left: 10px solid var(--future);
+  background: var(--future);
+}
+
+.hourRow:first-child .hour, .hourRow:first-child .userInputField , .hourRow:first-child .saveButton {
+  border-top: 10px solid var(--future);
+}
+
+.hourRow:first-child .hour {
+  border-top-left-radius: 25px;
+}
+
+.hourRow:first-child .saveButton {
+  border-top-right-radius: 25px;
+}
+
+.hourRow:last-child .hour, .hourRow:last-child .userInputField , .hourRow:last-child .saveButton {
+  border-bottom: 10px solid var(--future);
+}
+
+.hourRow:last-child .hour {
+  border-bottom-left-radius: 25px;
+}
+
+.hourRow:last-child .saveButton {
+  border-bottom-right-radius: 25px;
+}
+
+
+.userInputField {
+  height: 100%;
+  width: 75%;
+  display: flex;
+  align-items: flex-start;
+  background: none;
+  color: var(--babypowder);
+  border: 5px solid var(--future);
+  background: var(--gunmeta);
+  padding: 1em;
+  font-weight: 900;
+}
+
+.saveButton {
+  height: 100%;
+  width: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+   background: none;
+  color: var(--babypowder);
+  border: 5px solid var(--future);
+  border-right: 10px solid var(--future);
+  background: var(--future);
+}
+
+.saveButton i {
+  font-size: 2em;
 }
