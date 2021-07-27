@@ -18,11 +18,10 @@ var hourRowContainer = $('.hourRowsContainer');
 var timeFormat = 'h:mm a';
 // var rightNow = moment().format(timeFormat);
 var rightNow = moment();
-var hourStart = moment().startOf('hour').format(timeFormat);
-var hourEnd = moment().endOf('hour').format(timeFormat);
+var hourStart = moment().startOf('hour');
+var hourEnd = moment().endOf('hour');
 console.log(' Hour Start is: ' + hourStart + '\n' + ' Hour End is: ' + hourEnd);
 var startDay = moment('09', timeFormat).format(timeFormat); // Getting 9am as starting the day
-// var startDay2 = moment('09'); // Getting 9am as starting the day
 var tenAm = moment('10', timeFormat).format(timeFormat);
 var elevenAm = moment('11', timeFormat).format(timeFormat);
 var twelvePm = moment('12', timeFormat).format(timeFormat);
@@ -39,24 +38,29 @@ var [startTime,,,,,,,,endTime] = workDayHours;
 
 // Creating dynamic rows for each Hour
 var status = '';
-workDayHours.forEach(hour => {
-
+workDayHours.forEach(function(hour,index) {
+    var newIndex = index + 9;
     var hourRow = $(`<div class="hourRow">
                         <span class="hour">${hour}</span>
                     </div>`);
     hourRow.attr('data-time',hour);
+    hourRow.attr('data-hour',newIndex);
     hourRow.append($(`<input class="userInputField ${status}" type="textarea" placeholder="Enter Event">`));
     hourRow.append('<button class="saveButton"><i class="fas fa-save">');
     hourRowContainer.append(hourRow);
 
-    console.log(moment(hourRow.data('time').split(' ')[0], 'hour').format(timeFormat));
+    // Getting the moment of each Hour Row and putting it into timeFormat
+    var hourRowMoment = moment((hourRow.data('hour')),timeFormat).format(timeFormat);
 
-    if (moment(hourRow.data('time').split(' ')[0], 'h a').isBefore(hourStart)) {
+    if (moment((hourRow.data('hour'))).isBefore(hourStart)) {
         status = 'past';
-    } else if (moment(hourRow.data('time').split(' ')[0], 'hour').isAfter(hourStart)) {
+        console.log(hourRowMoment + ' is Before ' + hourStart.format(timeFormat));
+    } else if (moment((hourRow.data('hour'))).isAfter(hourStart)) {
         status = 'future';
-    } else if (moment(hourRow.data('time').split(' ')[0], 'hour').isBetween(hourStart),(hourEnd)) {
+        console.log(hourRowMoment + ' is After ' + hourStart.format(timeFormat));
+    } else if (moment((hourRow.data('hour'))).isBetween(hourStart),(hourEnd)) {
         status = 'present';
+        console.log(hourRowMoment + ' is Between ' + hourStart.format(timeFormat) + ' and ' + hourEnd.format(timeFormat));
     }
 
 })
