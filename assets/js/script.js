@@ -8,10 +8,18 @@
 var hours = [];
 var currentDay = $('#currentDay');
 var hourRowContainer = $('.hourRowsContainer');
-// var time ="Hello";
-// var timeRowTest = $(`<div class="col">${time}</div>`);
 
-// hourRowContainer.append(timeRowTest);
+// 9AM Events
+var nineAmEvents = localStorage.getItem('9:00 am events') || [];
+// var tenAmEvents = JSON.parse(localStorage.getItem('10:00 am events')) || [];
+// var elevenAmEvents = JSON.parse(localStorage.getItem('11:00 am events')) || [];
+// var twelvePmEvents = JSON.parse(localStorage.getItem('12:00 pm events')) || [];
+// var onePmEvents = JSON.parse(localStorage.getItem('1:00 pm events')) || [];
+// var twoPmEvents = JSON.parse(localStorage.getItem('2:00 pm events')) || [];
+// var threePmEvents = JSON.parse(localStorage.getItem('3:00 pm events')) || [];
+// var fourPmEvents = JSON.parse(localStorage.getItem('4:00 pm events')) || [];
+// var fivePmEvents = JSON.parse(localStorage.getItem('5:00 pm events')) || [];
+
 
 // -----------------------------------Generating Dynamic Hour Rows -------------------------------- //
 // Hours in Work Day
@@ -34,7 +42,7 @@ var endDay = moment('17', timeFormat).format(timeFormat); // Setting 5pm as end 
 // Storing hours of day in Array
 var workDayHours = [startDay,tenAm,elevenAm,twelvePm,onePm,twoPm,threePm,fourPm,endDay];
 var [startTime,,,,,,,,endTime] = workDayHours;
-// console.log(startTime + ' through ' + endTime); // 9 am through 5 pm
+console.log('Work Day is: ' + startTime + ' through ' + endTime); // 9 am through 5 pm
 
 // Creating dynamic rows for each Hour
 var status = '';
@@ -46,24 +54,85 @@ workDayHours.forEach(function(hour,index) {
     hourRow.attr('data-time',hour);
     hourRow.attr('data-hour',newIndex);
     hourRow.append($(`<input class="userInputField ${status}" type="textarea" placeholder="Enter Event">`));
-    hourRow.append('<button class="saveButton"><i class="fas fa-save">');
+    hourRow.append($(`<div class="eventContainer"></div>`));
+    hourRow.append('<button class="saveButton">');
     hourRowContainer.append(hourRow);
 
     // Getting the moment of each Hour Row and putting it into timeFormat
     var hourRowMoment = moment((hourRow.data('hour')),timeFormat).format(timeFormat);
 
-    if (moment((hourRow.data('hour'))).isBefore(hourStart)) {
+    // if (moment((hourRow.data('hour'))).isBefore(moment().startOf('hour'))) {
+    //     status = 'past';
+    //     console.log(hourRowMoment + ' is Before ' + hourStart.format(timeFormat));
+    // } else if (moment((hourRow.data('hour'))).isAfter(moment().startOf('hour'))) {
+    //     status = 'future';
+    //     console.log(hourRowMoment + ' is After ' + hourStart.format(timeFormat));
+    // } else if (moment((hourRow.data('hour'))).isBetween(moment().startOf('hour')),(moment().endOf('hour'))) {
+    //     status = 'present';
+    //     console.log(hourRowMoment + ' is Between ' + hourStart.format(timeFormat) + ' and ' + hourEnd.format(timeFormat));
+    // }
+
+    if (hourRow.data('hour') < moment().startOf('hour')) {
         status = 'past';
         console.log(hourRowMoment + ' is Before ' + hourStart.format(timeFormat));
-    } else if (moment((hourRow.data('hour'))).isAfter(hourStart)) {
+    } 
+    
+    if (hourRow.data('hour') > moment().endOf('hour')) {
         status = 'future';
         console.log(hourRowMoment + ' is After ' + hourStart.format(timeFormat));
-    } else if (moment((hourRow.data('hour'))).isBetween(hourStart),(hourEnd)) {
+    }
+    
+    if (hourRow.data('hour') < moment().startOf('hour') && hourRow.data('hour') > moment().endOf('hour')) {
         status = 'present';
         console.log(hourRowMoment + ' is Between ' + hourStart.format(timeFormat) + ' and ' + hourEnd.format(timeFormat));
     }
 
+    // var hourRowData = hourRow.data('hour');
+
+    // console.log(hourRow);
+
+    
+    console.log((hourRow.data('hour')));
+    // console.log(hourRowData);
+    // // console.log(moment(hourRow.data('hour')).format('hh'));
+    // console.log(moment(hourRowData).format(timeFormat));
+    
+    // var timeDetection = setInterval(function() {
+        //     if (moment((hourRow.data('hour'))).isBefore(moment().startOf('hour'))) {
+            //         status = 'past';
+            //         console.log(hourRowMoment + ' is Before ' + hourStart.format(timeFormat));
+            //     } else if (moment((hourRow.data('hour'))).isAfter(moment().startOf('hour'))) {
+                //         status = 'future';
+                //         console.log(hourRowMoment + ' is After ' + hourStart.format(timeFormat));
+                //     } else if (moment((hourRow.data('hour'))).isBetween(moment().startOf('hour')),(moment().endOf('hour'))) {
+                    //         status = 'present';
+                    //         console.log(hourRowMoment + ' is Between ' + hourStart.format(timeFormat) + ' and ' + hourEnd.format(timeFormat));
+                    //     }
+                    // }, 30000)
+    
 })
+
+    // Getting inputs
+    var saveButton = $('.saveButton');
+    // $('.eventContainer').html('Event Container');
+    saveButton.on('click',function(event) {
+        var eventInfo = $(event.target).parent().children().eq(1).val();
+        var eventContainer = $(event.target).parent().children().eq(2);
+        if(!eventInfo) {
+            eventContainer.html('Please Enter an Event to Save!');
+            return;
+        } else {
+            localStorage.setItem($(event.target).parent().children().eq(0).html() + ' events', eventInfo);
+            if($(event.target).parent().children().eq(0).html().split('')[0] === 9) {
+                nineAmEvents.push(eventInfo);
+            }
+            location.reload(true);
+        }
+    })
+
+
+    // console.log(moment().startOf('hour'));
+    // console.log(moment().endOf('hour'));
 
 // -----------------------------------End Generating Dynamic Hour Rows -------------------------------- //
 
@@ -77,3 +146,9 @@ var todayUpdate = setInterval(function() {
 }, 1000);
 
 
+var newEvent = $('<div class="event">');
+newEvent.html(nineAmEvents);
+// if ($('.eventContainer').html() === 'Please Enter an Event to Save!' || $('.eventContainer').html() === 'Event Container') {
+//     $('.eventContainer').html('');
+// }
+$('.eventContainer').append(newEvent);

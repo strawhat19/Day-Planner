@@ -76,6 +76,7 @@ textarea:focus-visible {
   --past: #760C05;
   --present: #1C872F;
   --default: #25A792;
+  --null: #28907f;
   --gunmetal: #223843;
   --babypowder: #FFFFFC;
 }
@@ -154,7 +155,7 @@ textarea:focus-visible {
   background: var(--default);
 }
 
-.hourRow:first-child .hour, .hourRow:first-child .userInputField , .hourRow:first-child .saveButton {
+.hourRow:first-child .hour, .hourRow:first-child .userInputField , .hourRow:first-child .saveButton, .hourRow:first-child .eventContainer {
   border-top: 10px solid var(--default);
 }
 
@@ -171,7 +172,7 @@ textarea:focus-visible {
   border-top-right-radius: 25px;
 }
 
-.hourRow:last-child .hour, .hourRow:last-child .userInputField , .hourRow:last-child .saveButton {
+.hourRow:last-child .hour, .hourRow:last-child .userInputField , .hourRow:last-child .saveButton, .hourRow:last-child .eventContainer {
   border-bottom: 10px solid var(--default);
 }
 
@@ -189,7 +190,7 @@ textarea:focus-visible {
 
 .userInputField {
   height: 100%;
-  width: 75%;
+  width: 50%;
   display: flex;
   align-items: flex-start;
   background: none;
@@ -200,19 +201,37 @@ textarea:focus-visible {
   font-weight: 900;
 }
 
+.eventContainer {
+  background: #28907f;
+  height: 100%;
+  display: flex;
+  width: 25%;
+  padding: 1em;
+  align-items: center;
+  border: 5px solid var(--default);
+}
+
 .saveButton {
   height: 100%;
   width: 10%;
   display: flex;
   align-items: center;
   justify-content: center;
-   background: none;
+  background: none;
   color: var(--babypowder);
   border: 5px solid var(--default);
   border-right: 10px solid var(--default);
-  background: var(--default);
+  background: url(/assets/images/save-icon.svg), var(--default);
+  background-repeat: no-repeat;
+  background-size: 60%;
+  background-position: 50% 50%;
+  transition: 150ms ease-in-out;
 }
 
-.saveButton i {
-  font-size: 2em;
+.saveButton:active {
+  background: url(/assets/images/save-icon.svg),var(--null);
+  background-repeat: no-repeat;
+  background-size: 60%;
+  background-position: 50% 50%;
+  transition: 150ms ease-in-out;
 }
