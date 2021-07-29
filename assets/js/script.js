@@ -24,7 +24,7 @@ var timeFormat = 'h:mm a';
 var rightNow = moment();
 var hourStart = moment().startOf('hour');
 var hourEnd = moment().endOf('hour');
-console.log(' Hour Start is: ' + hourStart + '\n' + ' Hour End is: ' + hourEnd);
+// console.log(' Hour Start is: ' + hourStart + '\n' + ' Hour End is: ' + hourEnd);
 var startDay = moment('09', timeFormat).format(timeFormat); // Getting 9am as starting the day
 var tenAm = moment('10', timeFormat).format(timeFormat);
 var elevenAm = moment('11', timeFormat).format(timeFormat);
@@ -62,13 +62,13 @@ workDayHours.forEach(function(hour,index) {
     hourRowContainer.append(hourRow);
 })
 
+// -----------------------------------End Generating Dynamic Hour Rows -------------------------------- //
+
     // Checking if Input are in the past
     if ($('input.past')) {
         $('input.past').attr('placeholder','This Time has Passed');
         $('input.past').prop('disabled',true);
     }
-
-    // Checking if textarea has class of past
 
     // Getting inputs & buttons
     var saveButton = $('.saveButton');
@@ -111,9 +111,6 @@ workDayHours.forEach(function(hour,index) {
         }
     })
 
-// -----------------------------------End Generating Dynamic Hour Rows -------------------------------- //
-
-
 // Update Todays Time
 var today = moment().format('dddd, MMMM Do YYYY, h:mm:ss a');
 currentDay.html(today);
@@ -127,80 +124,53 @@ var todayUpdate = setInterval(function() {
 nineAmEvents.forEach(event => {
     var nineAmEventDivs = $('<div class="event">');
     nineAmEventDivs.html('- ' + event);
-    if ($('.eventContainer').html() === '<div class="event">Please Enter an Event to Save!</div>') {
-        $('.eventContainer').html('');
-    }
     $('#hour0').append(nineAmEventDivs);
 })
 
 tenAmEvents.forEach(event => {
     var tenAmEventDivs = $('<div class="event">');
     tenAmEventDivs.html('- ' + event);
-    if ($('.eventContainer').html() === 'Please Enter an Event to Save!') {
-        $('.eventContainer').html('');
-    }
     $('#hour1').append(tenAmEventDivs);
 })
 
 elevenAmEvents.forEach(event => {
     var elevenAmEventDivs = $('<div class="event">');
     elevenAmEventDivs.html('- ' + event);
-    if ($('.eventContainer').html() === 'Please Enter an Event to Save!') {
-        $('.eventContainer').html('');
-    }
     $('#hour2').append(elevenAmEventDivs);
 })
 
 twelvePmEvents.forEach(event => {
     var twelvePmEventDivs = $('<div class="event">');
     twelvePmEventDivs.html('- ' + event);
-    if ($('.eventContainer').html() === 'Please Enter an Event to Save!') {
-        $('.eventContainer').html('');
-    }
     $('#hour3').append(twelvePmEventDivs);
 })
 
 onePmEvents.forEach(event => {
     var onePmEventDivs = $('<div class="event">');
     onePmEventDivs.html('- ' + event);
-    if ($('.eventContainer').html() === 'Please Enter an Event to Save!') {
-        $('.eventContainer').html('');
-    }
     $('#hour4').append(onePmEventDivs);
 })
 
 twoPmEvents.forEach(event => {
     var twoPmEventDivs = $('<div class="event">');
     twoPmEventDivs.html('- ' + event);
-    if ($('.eventContainer').html() === 'Please Enter an Event to Save!') {
-        $('.eventContainer').html('');
-    }
     $('#hour5').append(twoPmEventDivs);
 })
 
 threePmEvents.forEach(event => {
     var threePmEventDivs = $('<div class="event">');
     threePmEventDivs.html('- ' + event);
-    if ($('.eventContainer').html() === 'Please Enter an Event to Save!') {
-        $('.eventContainer').html('');
-    }
     $('#hour6').append(threePmEventDivs);
 })
 
 fourPmEvents.forEach(event => {
     var fourPmEventDivs = $('<div class="event">');
     fourPmEventDivs.html('- ' + event);
-    if ($('.eventContainer').html() === 'Please Enter an Event to Save!') {
-        $('.eventContainer').html('');
-    }
     $('#hour7').append(fourPmEventDivs);
 })
 
 fivePmEvents.forEach(event => {
     var fivePmEventDivs = $('<div class="event">');
     fivePmEventDivs.html('- ' + event);
-    if ($('.eventContainer').html() === 'Please Enter an Event to Save!') {
-        $('.eventContainer').html('');
-    }
     $('#hour8').append(fivePmEventDivs);
 })
