@@ -41,31 +41,34 @@ var [startTime,,,,,,,,endTime] = workDayHours;
 console.log('Work Day is: ' + startTime + ' through ' + endTime); // 9 am through 5 pm
 
 // Creating dynamic rows for each Hour
-function checkTime() {
 var status = '';
-    workDayHours.forEach(function(hour,index) {
-        var newIndex = index + 9;
-        var hourRow = $(`<div class="hourRow">
-        <span class="hour">${hour}</span>
-        </div>`);
-        hourRow.attr('data-hour',newIndex);
-        hourRow.attr('data-time',hour);
-            if (hourRow.data('hour') < moment().hours()) {
-                status = 'past';
-            } else if (hourRow.data('hour') === moment().hours()) {
-                status = 'present';
-            } else {
-                status = 'future';
-            }
-        hourRow.append($(`<input class="userInputField ${status}" type="textarea" placeholder="Enter Event">`));
-        hourRow.append($(`<div class="eventContainer" id="hour${index}"></div>`));
-        hourRow.append('<button class="saveButton">');
-        hourRowContainer.append(hourRow);
-    })
-}
+workDayHours.forEach(function(hour,index) {
+    var newIndex = index + 9;
+    var hourRow = $(`<div class="hourRow">
+    <span class="hour">${hour}</span>
+    </div>`);
+    hourRow.attr('data-hour',newIndex);
+    hourRow.attr('data-time',hour);
+        if (hourRow.data('hour') < moment().hours()) {
+            status = 'past';
+        } else if (hourRow.data('hour') === moment().hours()) {
+            status = 'present';
+        } else {
+            status = 'future';
+        }
+    hourRow.append($(`<input class="userInputField ${status}" type="textarea" placeholder="Enter Event">`));
+    hourRow.append($(`<div class="eventContainer ${status}" id="hour${index}"></div>`));
+    hourRow.append('<button class="saveButton">');
+    hourRowContainer.append(hourRow);
+})
 
-// Calling Check Time Function
-checkTime();
+    // Checking if Input are in the past
+    if ($('input.past')) {
+        $('input.past').attr('placeholder','This Time has Passed');
+        $('input.past').prop('disabled',true);
+    }
+
+    // Checking if textarea has class of past
 
     // Getting inputs & buttons
     var saveButton = $('.saveButton');
@@ -107,10 +110,6 @@ checkTime();
             location.reload(true);
         }
     })
-
-
-    // console.log(moment().startOf('hour'));
-    // console.log(moment().endOf('hour'));
 
 // -----------------------------------End Generating Dynamic Hour Rows -------------------------------- //
 

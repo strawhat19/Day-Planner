@@ -74,7 +74,7 @@ textarea:focus-visible {
 
 :root {
   --past: #760C05;
-  --present: #1C872F;
+  --present: #06c3a4;
   --future: #77dd77;
   --default: #25A792;
   --null: #28907f;
@@ -83,8 +83,27 @@ textarea:focus-visible {
 }
 
 .past {
-  background: var(--past) !important;
+  background: var(--default) !important;
   color: var(--babypowder) !important;
+}
+
+.eventContainer.past {
+  background: url(/assets/images/WorkDayPlannerLogo.png),var(--default) !important;
+  background-size: 20% !important;
+  background-repeat: no-repeat !important;
+  background-position: 90% 50% !important;
+}
+.eventContainer.present {
+  background: url(/assets/images/WorkDayPlannerLogo.png),var(--present) !important;
+  background-size: 20% !important;
+  background-repeat: no-repeat !important;
+  background-position: 90% 50% !important;
+}
+.eventContainer.future {
+  background: url(/assets/images/WorkDayPlannerLogo.png),var(--null) !important;
+  background-size: 20% !important;
+  background-repeat: no-repeat !important;
+  background-position: 90% 50% !important;
 }
 
 .present {
@@ -93,23 +112,9 @@ textarea:focus-visible {
 }
 
 .future {
-  background: var(--future) !important;
+  background: var(--null) !important;
   color: var(--babypowder) !important;
 }
-
-/* .saveBtn {
-  border-left: 1px solid black;
-  border-top-right-radius: 15px;
-  border-bottom-right-radius: 15px;
-  background-color: #06aed5;
-  color: white;
-}
-
-.saveBtn i:hover {
-  font-size: 20px;
-  transition: all 0.3s ease-in-out;
-} */
-
 
 /* Begin Custom CSS */
 
@@ -130,6 +135,10 @@ textarea:focus-visible {
 
 ::placeholder {
   color: #ddd;
+}
+
+.present::placeholder {
+  color: #fff;
 }
 
 #currentDay {
