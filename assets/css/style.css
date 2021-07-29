@@ -236,6 +236,10 @@ textarea:focus-visible {
   justify-content: flex-start;
   overflow-y: scroll;
   flex-wrap: wrap;
+  font-size: .8em;
+  font-style: italic;
+  width: 50%;
+  font-weight: 600;
 }
 
 .eventContainer::before {
@@ -250,7 +254,7 @@ textarea:focus-visible {
 }
 
 .event {
-  font-size: .8em;
+  font-size: .9em;
   font-style: italic;
   width: 50%;
   font-weight: 600;

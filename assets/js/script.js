@@ -16,7 +16,6 @@ var threePmEvents = JSON.parse(localStorage.getItem("Three Events")) || [];
 var fourPmEvents = JSON.parse(localStorage.getItem("Four Events")) || [];
 var fivePmEvents = JSON.parse(localStorage.getItem("Five Events")) || [];
 
-
 // -----------------------------------Generating Dynamic Hour Rows -------------------------------- //
 
 // Hours in Work Day
@@ -24,7 +23,6 @@ var timeFormat = 'h:mm a';
 var rightNow = moment();
 var hourStart = moment().startOf('hour');
 var hourEnd = moment().endOf('hour');
-// console.log(' Hour Start is: ' + hourStart + '\n' + ' Hour End is: ' + hourEnd);
 var startDay = moment('09', timeFormat).format(timeFormat); // Getting 9am as starting the day
 var tenAm = moment('10', timeFormat).format(timeFormat);
 var elevenAm = moment('11', timeFormat).format(timeFormat);
@@ -46,20 +44,20 @@ workDayHours.forEach(function(hour,index) {
     var newIndex = index + 9;
     var hourRow = $(`<div class="hourRow">
     <span class="hour">${hour}</span>
-    </div>`);
+    </div>`); // Creating Hour Rows
     hourRow.attr('data-hour',newIndex);
     hourRow.attr('data-time',hour);
         if (hourRow.data('hour') < moment().hours()) {
-            status = 'past';
+            status = 'past'; // Below the current hour
         } else if (hourRow.data('hour') === moment().hours()) {
-            status = 'present';
-        } else {
+            status = 'present'; // If its the current hour
+        } else { // Everything Else
             status = 'future';
-        }
-    hourRow.append($(`<input class="userInputField ${status}" type="textarea" placeholder="Enter Event">`));
-    hourRow.append($(`<div class="eventContainer ${status}" id="hour${index}"></div>`));
-    hourRow.append('<button class="saveButton">');
-    hourRowContainer.append(hourRow);
+        } // Appending Hour Rows
+    hourRow.append($(`<input class="userInputField ${status}" type="textarea" placeholder="Enter Event">`)); // Textarea Input
+    hourRow.append($(`<div class="eventContainer ${status}" id="hour${index}"></div>`)); // Creating Event Containers
+    hourRow.append('<button class="saveButton">'); // Creating Save Button
+    hourRowContainer.append(hourRow); // Append everything to the row, and append the row to the hour row container
 })
 
 // -----------------------------------End Generating Dynamic Hour Rows -------------------------------- //
@@ -78,7 +76,7 @@ workDayHours.forEach(function(hour,index) {
         if(!eventInfo) {
             eventContainer.html('Please Enter an Event to Save!');
             return;
-        } else {
+        } else { // Storing Events
             if ($(event.target).parent().data('hour') === 9) {
                 nineAmEvents.push(eventInfo);
                 localStorage.setItem("Nine Events",JSON.stringify(nineAmEvents));
@@ -118,7 +116,6 @@ var todayUpdate = setInterval(function() {
     var today = moment().format('dddd, MMMM Do YYYY, h:mm:ss a');
     currentDay.html(today);
 }, 1000);
-
 
 // Appending Stored Events from Local Storage for each Row
 nineAmEvents.forEach(event => {
