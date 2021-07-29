@@ -18,6 +18,7 @@ var fivePmEvents = JSON.parse(localStorage.getItem("Five Events")) || [];
 
 
 // -----------------------------------Generating Dynamic Hour Rows -------------------------------- //
+
 // Hours in Work Day
 var timeFormat = 'h:mm a';
 var rightNow = moment();
@@ -116,7 +117,7 @@ workDayHours.forEach(function(hour,index) {
             eventContainer.html('Please Enter an Event to Save!');
             return;
         } else {
-            if($(event.target).parent().data('hour') === 9) {
+            if ($(event.target).parent().data('hour') === 9) {
                 nineAmEvents.push(eventInfo);
                 localStorage.setItem("Nine Events",JSON.stringify(nineAmEvents));
             } else if ($(event.target).parent().data('hour') === 10) {
