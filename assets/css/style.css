@@ -75,6 +75,7 @@ textarea:focus-visible {
 :root {
   --past: #760C05;
   --present: #1C872F;
+  --future: #77dd77;
   --default: #25A792;
   --null: #28907f;
   --gunmetal: #223843;
@@ -82,17 +83,17 @@ textarea:focus-visible {
 }
 
 .past {
-  background-color: var(--past) !important;
+  background: var(--past) !important;
   color: var(--babypowder) !important;
 }
 
 .present {
-  background-color: #ff6961 !important;
+  background: var(--present) !important;
   color: var(--babypowder) !important;
 }
 
 .future {
-  background-color: #77dd77 !important;
+  background: var(--future) !important;
   color: var(--babypowder) !important;
 }
 
