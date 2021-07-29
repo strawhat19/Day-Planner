@@ -213,9 +213,18 @@ textarea:focus-visible {
   height: 100%;
   display: flex;
   width: 25%;
-  padding: 1em;
-  align-items: center;
+  padding: 1em 0.5em;
+  align-items: flex-start;
   border: 5px solid var(--default);
+  flex-direction: column;
+  text-align: center;
+  justify-content: space-evenly;
+  overflow-y: scroll;
+}
+
+.event {
+  font-size: .8em;
+  font-style: italic;
 }
 
 .saveButton {
@@ -241,4 +250,26 @@ textarea:focus-visible {
   background-size: 60%;
   background-position: 50% 50%;
   transition: 150ms ease-in-out;
+}
+
+::-webkit-scrollbar {
+  background: var(--gunmetal);
+  opacity: 0;
+  width: 5px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--babypowder);
+  width: 5px;
+}
+::-webkit-scrollbar-corner {
+  display: none;
+  height: 0;
+}
+::-webkit-scrollbar-track-piece {
+  display: none;
+  height: 0;
+}
+::-webkit-scrollbar-button {
+  display: none;
+  height: 0;
 }

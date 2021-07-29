@@ -10,15 +10,16 @@ var currentDay = $('#currentDay');
 var hourRowContainer = $('.hourRowsContainer');
 
 // 9AM Events
-var nineAmEvents = localStorage.getItem('9:00 am events') || [];
-// var tenAmEvents = JSON.parse(localStorage.getItem('10:00 am events')) || [];
-// var elevenAmEvents = JSON.parse(localStorage.getItem('11:00 am events')) || [];
-// var twelvePmEvents = JSON.parse(localStorage.getItem('12:00 pm events')) || [];
-// var onePmEvents = JSON.parse(localStorage.getItem('1:00 pm events')) || [];
-// var twoPmEvents = JSON.parse(localStorage.getItem('2:00 pm events')) || [];
-// var threePmEvents = JSON.parse(localStorage.getItem('3:00 pm events')) || [];
-// var fourPmEvents = JSON.parse(localStorage.getItem('4:00 pm events')) || [];
-// var fivePmEvents = JSON.parse(localStorage.getItem('5:00 pm events')) || [];
+// var nineAmEvents = [];
+var nineAmEvents = JSON.parse(localStorage.getItem("Nine Events")) || [];
+var tenAmEvents = JSON.parse(localStorage.getItem("Ten Events")) || [];
+// // var elevenAmEvents = JSON.parse(localStorage.getItem("11 events")) || [];
+// // var twelvePmEvents = JSON.parse(localStorage.getItem("12:00 pm events")) || [];
+// // var onePmEvents = JSON.parse(localStorage.getItem("1:00 pm events")) || [];
+// var twoPmEvents = JSON.parse(localStorage.getItem("2 events")) || [];
+// var threePmEvents = JSON.parse(localStorage.getItem("3 events")) || [];
+// var fourPmEvents = JSON.parse(localStorage.getItem("4 events")) || [];
+// var fivePmEvents = JSON.parse(localStorage.getItem("5 events")) || [];
 
 
 // -----------------------------------Generating Dynamic Hour Rows -------------------------------- //
@@ -54,7 +55,7 @@ workDayHours.forEach(function(hour,index) {
     hourRow.attr('data-time',hour);
     hourRow.attr('data-hour',newIndex);
     hourRow.append($(`<input class="userInputField ${status}" type="textarea" placeholder="Enter Event">`));
-    hourRow.append($(`<div class="eventContainer"></div>`));
+    hourRow.append($(`<div class="eventContainer" id="hour${index}"></div>`));
     hourRow.append('<button class="saveButton">');
     hourRowContainer.append(hourRow);
 
@@ -114,7 +115,6 @@ workDayHours.forEach(function(hour,index) {
 
     // Getting inputs
     var saveButton = $('.saveButton');
-    // $('.eventContainer').html('Event Container');
     saveButton.on('click',function(event) {
         var eventInfo = $(event.target).parent().children().eq(1).val();
         var eventContainer = $(event.target).parent().children().eq(2);
@@ -122,9 +122,16 @@ workDayHours.forEach(function(hour,index) {
             eventContainer.html('Please Enter an Event to Save!');
             return;
         } else {
-            localStorage.setItem($(event.target).parent().children().eq(0).html() + ' events', eventInfo);
-            if($(event.target).parent().children().eq(0).html().split('')[0] === 9) {
+            // localStorage.setItem($(event.target).parent().children().eq(2).attr('id').split('')[4] + " events", eventInfo);
+            // // localStorage.setItem($(event.target).parent().children().eq(2).attr('id').split('')[4] + " events", eventInfo);
+            // // nineAmEvents.push(eventInfo);
+            // // localStorage.setItem("Nine Events",JSON.stringify(nineAmEvents));
+            if($(event.target).parent().data('hour') === 9) {
                 nineAmEvents.push(eventInfo);
+                localStorage.setItem("Nine Events",JSON.stringify(nineAmEvents));
+            } else if ($(event.target).parent().data('hour') === 10) {
+                tenAmEvents.push(eventInfo);
+                localStorage.setItem("Ten Events",JSON.stringify(tenAmEvents));
             }
             location.reload(true);
         }
@@ -146,9 +153,20 @@ var todayUpdate = setInterval(function() {
 }, 1000);
 
 
-var newEvent = $('<div class="event">');
-newEvent.html(nineAmEvents);
-// if ($('.eventContainer').html() === 'Please Enter an Event to Save!' || $('.eventContainer').html() === 'Event Container') {
-//     $('.eventContainer').html('');
-// }
-$('.eventContainer').append(newEvent);
+nineAmEvents.forEach(event => {
+    var nineAmEventDivs = $('<div class="event">');
+    nineAmEventDivs.html('- ' + event);
+    if ($('.eventContainer').html() === 'Please Enter an Event to Save!') {
+        $('.eventContainer').html('');
+    }
+    $('#hour0').append(nineAmEventDivs);
+})
+
+tenAmEvents.forEach(event => {
+    var tenAmEventDivs = $('<div class="event">');
+    tenAmEventDivs.html('- ' + event);
+    if ($('.eventContainer').html() === 'Please Enter an Event to Save!') {
+        $('.eventContainer').html('');
+    }
+    $('#hour1').append(tenAmEventDivs);
+})
