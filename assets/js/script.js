@@ -54,8 +54,8 @@ workDayHours.forEach(function(hour,index) {
         } else { // Everything Else
             status = 'future';
         } // Appending Hour Rows
-    hourRow.append($(`<input class="userInputField ${status}" type="textarea" placeholder="Enter Event">`)); // Textarea Input
-    hourRow.append($(`<div class="eventContainer ${status}" id="hour${index}"></div>`)); // Creating Event Containers
+    hourRow.append($(`<input class="userInputField ${status} insetShadow" type="textarea" placeholder="Enter Event">`)); // Textarea Input
+    hourRow.append($(`<div class="eventContainer ${status} insetShadow" id="hour${index}"></div>`)); // Creating Event Containers
     hourRow.append('<button class="saveButton">'); // Creating Save Button
     hourRowContainer.append(hourRow); // Append everything to the row, and append the row to the hour row container
 })
