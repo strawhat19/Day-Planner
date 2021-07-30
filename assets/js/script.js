@@ -47,6 +47,8 @@ workDayHours.forEach(function(hour,index) {
     </div>`); // Creating Hour Rows
     hourRow.attr('data-hour',newIndex);
     hourRow.attr('data-time',hour);
+    var buttonContainer = $('<div class="buttonContainer">');
+        // Time Detection
         if (hourRow.data('hour') < moment().hours()) {
             status = 'past'; // Below the current hour
         } else if (hourRow.data('hour') === moment().hours()) {
@@ -56,7 +58,9 @@ workDayHours.forEach(function(hour,index) {
         } // Appending Hour Rows
     hourRow.append($(`<input class="userInputField ${status} insetShadow" type="textarea" placeholder="Enter Event">`)); // Textarea Input
     hourRow.append($(`<div class="eventContainer ${status} insetShadow" id="hour${index}"></div>`)); // Creating Event Containers
-    hourRow.append('<button class="saveButton">'); // Creating Save Button
+    buttonContainer.append('<button class="saveButton">'); // Creating Save Button
+    buttonContainer.append('<button class="clearButton"><i class="fas fa-times"></i>'); // Creating Clear Button
+    hourRow.append(buttonContainer);
     hourRowContainer.append(hourRow); // Append everything to the row, and append the row to the hour row container
 })
 
@@ -71,37 +75,37 @@ workDayHours.forEach(function(hour,index) {
     // Getting inputs & buttons
     var saveButton = $('.saveButton');
     saveButton.on('click',function(event) {
-        var eventInfo = $(event.target).parent().children().eq(1).val();
-        var eventContainer = $(event.target).parent().children().eq(2);
+        var eventInfo = $(event.target).parent().parent().children().eq(1).val();
+        var eventContainer = $(event.target).parent().parent().children().eq(2);
         if(!eventInfo) {
             eventContainer.html('Please Enter an Event to Save!');
             return;
         } else { // Storing Events
-            if ($(event.target).parent().data('hour') === 9) {
+            if ($(event.target).parent().parent().data('hour') === 9) {
                 nineAmEvents.push(eventInfo);
                 localStorage.setItem("Nine Events",JSON.stringify(nineAmEvents));
-            } else if ($(event.target).parent().data('hour') === 10) {
+            } else if ($(event.target).parent().parent().data('hour') === 10) {
                 tenAmEvents.push(eventInfo);
                 localStorage.setItem("Ten Events",JSON.stringify(tenAmEvents));
-            } else if ($(event.target).parent().data('hour') === 11) {
+            } else if ($(event.target).parent().parent().data('hour') === 11) {
                 elevenAmEvents.push(eventInfo);
                 localStorage.setItem("Eleven Events",JSON.stringify(elevenAmEvents));
-            } else if ($(event.target).parent().data('hour') === 12) {
+            } else if ($(event.target).parent().parent().data('hour') === 12) {
                 twelvePmEvents.push(eventInfo);
                 localStorage.setItem("Twelve Events",JSON.stringify(twelvePmEvents));
-            } else if ($(event.target).parent().data('hour') === 13) {
+            } else if ($(event.target).parent().parent().data('hour') === 13) {
                 onePmEvents.push(eventInfo);
                 localStorage.setItem("One Events",JSON.stringify(onePmEvents));
-            } else if ($(event.target).parent().data('hour') === 14) {
+            } else if ($(event.target).parent().parent().data('hour') === 14) {
                 twoPmEvents.push(eventInfo);
                 localStorage.setItem("Two Events",JSON.stringify(twoPmEvents));
-            } else if ($(event.target).parent().data('hour') === 15) {
+            } else if ($(event.target).parent().parent().data('hour') === 15) {
                 threePmEvents.push(eventInfo);
                 localStorage.setItem("Three Events",JSON.stringify(threePmEvents));
-            } else if ($(event.target).parent().data('hour') === 16) {
+            } else if ($(event.target).parent().parent().data('hour') === 16) {
                 fourPmEvents.push(eventInfo);
                 localStorage.setItem("Four Events",JSON.stringify(fourPmEvents));
-            } else if ($(event.target).parent().data('hour') === 17) {
+            } else if ($(event.target).parent().parent().data('hour') === 17) {
                 fivePmEvents.push(eventInfo);
                 localStorage.setItem("Five Events",JSON.stringify(fivePmEvents));
             }

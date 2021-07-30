@@ -88,19 +88,19 @@ textarea:focus-visible {
 }
 
 .eventContainer.past {
-  background: url(/assets/images/WorkDayPlannerLogo.png),var(--default) !important;
+  background: url(./images/WorkDayPlannerLogo.png),var(--default) !important;
   background-size: 20% !important;
   background-repeat: no-repeat !important;
   background-position: 90% 50% !important;
 }
 .eventContainer.present {
-  background: url(/assets/images/WorkDayPlannerLogo.png),var(--present) !important;
+  background: url(./images/WorkDayPlannerLogo.png),var(--present) !important;
   background-size: 20% !important;
   background-repeat: no-repeat !important;
   background-position: 90% 50% !important;
 }
 .eventContainer.future {
-  background: url(/assets/images/WorkDayPlannerLogo.png),var(--null) !important;
+  background: url(./images/WorkDayPlannerLogo.png),var(--null) !important;
   background-size: 20% !important;
   background-repeat: no-repeat !important;
   background-position: 90% 50% !important;
@@ -225,7 +225,7 @@ textarea:focus-visible {
 .insetShadow {
   border-radius: 15px;
   box-shadow: inset 0 0 8px #177163;
-  border: 5px solid var(--babypowder) !important;
+  border: 4px solid var(--null) !important;
 }
 
 .eventContainer {
@@ -272,17 +272,55 @@ textarea:focus-visible {
   font-weight: 600;
 }
 
+.buttonContainer {
+  width: 10%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+button:focus {
+  outline: 1px dotted;
+  outline: 0px auto -webkit-focus-ring-color;
+}
+
 .saveButton {
   height: 100%;
-  width: 10%;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   background: none;
   color: var(--babypowder);
   border: 5px solid var(--default);
-  border-right: 10px solid var(--default);
-  background: url(/assets/images/save-icon.svg), var(--default);
+  background: url(./images/save-icon.svg), var(--default);
+  background-repeat: no-repeat;
+  background-size: 60%;
+  background-position: 50% 50%;
+  transition: 150ms ease-in-out;
+}
+
+.clearButton {
+  font-size: 2em;
+  height: 100%;
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--babypowder);
+  border: none;
+  border-radius: 25px;
+  background: var(--null) !important;
+  background-repeat: no-repeat;
+  background-size: 60%;
+  background-position: 50% 50%;
+  transition: 150ms ease-in-out;
+}
+
+.clearButton:active {
+  background: var(--default) !important;
   background-repeat: no-repeat;
   background-size: 60%;
   background-position: 50% 50%;
@@ -290,7 +328,7 @@ textarea:focus-visible {
 }
 
 .saveButton:active {
-  background: url(/assets/images/save-icon.svg),var(--null);
+  background: url(./images/save-icon.svg),var(--null);
   background-repeat: no-repeat;
   background-size: 60%;
   background-position: 50% 50%;
