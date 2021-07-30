@@ -146,7 +146,9 @@ textarea:focus-visible {
 }
 
 .hourRowsContainer {
-  padding-bottom: 7em;
+  border: 5px solid var(--babypowder);
+  padding: 0;
+  border-radius: 30px;
 }
 
 .hourRow {
@@ -327,7 +329,7 @@ button:focus {
 }
 
 .clearButtonMax {
-  margin: -2em auto 2em;
+  margin: 2em auto;
   padding: .5em;
   width: 20%;
   border: 5px solid var(--babypowder);
