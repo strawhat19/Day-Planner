@@ -113,6 +113,32 @@ workDayHours.forEach(function(hour,index) {
         }
     })
 
+     // Getting clear buttons
+     var clearButton = $('.clearButton');
+     clearButton.on('click',function(event) {
+         // Clearing Events
+             if ($(event.target).parent().parent().data('hour') === 9) {
+                 localStorage.removeItem('Nine Events');
+             } else if ($(event.target).parent().parent().data('hour') === 10) {
+                localStorage.removeItem('Ten Events');
+             } else if ($(event.target).parent().parent().data('hour') === 11) {
+                 localStorage.removeItem('Eleven Events');
+             } else if ($(event.target).parent().parent().data('hour') === 12) {
+                 localStorage.removeItem('Twelve Events');
+             } else if ($(event.target).parent().parent().data('hour') === 13) {
+                localStorage.removeItem('One Events');
+             } else if ($(event.target).parent().parent().data('hour') === 14) {
+                localStorage.removeItem('Two Events');
+             } else if ($(event.target).parent().parent().data('hour') === 15) {
+                 localStorage.removeItem('Three Events');
+             } else if ($(event.target).parent().parent().data('hour') === 16) {
+                 localStorage.removeItem('Four Events');
+             } else if ($(event.target).parent().parent().data('hour') === 17) {
+                 localStorage.removeItem('Five Events');
+             }
+             location.reload(true);
+     })
+
 // Update Todays Time
 var today = moment().format('dddd, MMMM Do YYYY, h:mm:ss a');
 currentDay.html(today);
@@ -174,4 +200,11 @@ fivePmEvents.forEach(event => {
     var fivePmEventDivs = $('<div class="event">');
     fivePmEventDivs.html('- ' + event);
     $('#hour8').append(fivePmEventDivs);
+})
+
+// Clear Button Main
+var clearButtonMain = $('.clearButtonMax');
+clearButtonMain.on('click',function(event) {
+    localStorage.clear();
+    location.reload(true);
 })

@@ -237,7 +237,6 @@ textarea:focus-visible {
   background-position: 90% 50%;
   height: 100%;
   display: flex;
-  width: 25%;
   padding: 2em;
   align-items: flex-start;
   border: 5px solid var(--default);
@@ -248,7 +247,7 @@ textarea:focus-visible {
   flex-wrap: wrap;
   font-size: .8em;
   font-style: italic;
-  width: 50%;
+  width: 42%;
   font-weight: 600;
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
@@ -287,7 +286,7 @@ button:focus {
 }
 
 .saveButton {
-  height: 100%;
+  height: 85%;
   width: 100%;
   display: flex;
   align-items: center;
@@ -297,21 +296,21 @@ button:focus {
   border: 5px solid var(--default);
   background: url(./images/save-icon.svg), var(--default);
   background-repeat: no-repeat;
-  background-size: 60%;
+  background-size: 55%;
   background-position: 50% 50%;
   transition: 150ms ease-in-out;
 }
 
 .clearButton {
   font-size: 2em;
-  height: 100%;
+  height: 85%;
   width: 80%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--babypowder);
-  border: none;
-  border-radius: 25px;
+  border: 5px solid var(--babypowder);
+  border-radius: 15px;
   background: var(--null) !important;
   background-repeat: no-repeat;
   background-size: 60%;
@@ -327,10 +326,18 @@ button:focus {
   transition: 150ms ease-in-out;
 }
 
+.clearButtonMax {
+  margin: -2em auto 2em;
+  padding: .5em;
+  width: 20%;
+  border: 5px solid var(--babypowder);
+  font-size: 1.5em;
+}
+
 .saveButton:active {
   background: url(./images/save-icon.svg),var(--null);
   background-repeat: no-repeat;
-  background-size: 60%;
+  background-size: 55%;
   background-position: 50% 50%;
   transition: 150ms ease-in-out;
 }
