@@ -32,6 +32,13 @@ textarea:focus-visible {
   outline-width: 0px;
 }
 
+hr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 5px solid rgb(37 167 146);
+  width: 10%;
+}
+
 .saveButton:focus {
   outline: -webkit-focus-ring-color auto 1px;
   outline-color: -webkit-focus-ring-color;
@@ -46,6 +53,8 @@ textarea:focus-visible {
   border-radius: 0;
   border-bottom: 10px solid var(--default);
   margin-bottom: 5rem;
+  display: flex;
+  align-items: center;
 }
 
 .description {
@@ -166,6 +175,7 @@ textarea:focus-visible {
   height: 100%;
   font-weight: 900;
   width: 15%;
+  font-size: 1.5em;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -189,10 +199,6 @@ textarea:focus-visible {
   border-top-left-radius: 25px;
 }
 
-.hourRow:first-child .saveButton {
-  border-top-right-radius: 25px;
-}
-
 .hourRow:last-child .hour, .hourRow:last-child .userInputField , .hourRow:last-child .saveButton, .hourRow:last-child .eventContainer {
   border-bottom: 10px solid var(--default);
 }
@@ -205,10 +211,6 @@ textarea:focus-visible {
 
 .hourRow:last-child .hour {
   border-bottom-left-radius: 25px;
-}
-
-.hourRow:last-child .saveButton {
-  border-bottom-right-radius: 25px;
 }
 
 .userInputField {
@@ -227,7 +229,7 @@ textarea:focus-visible {
 .insetShadow {
   border-radius: 15px;
   box-shadow: inset 0 0 8px #177163;
-  border: 4px solid var(--null) !important;
+  border: 4px solid var(--babypowder) !important;
 }
 
 .eventContainer {
@@ -280,6 +282,7 @@ textarea:focus-visible {
   height: 100%;
   justify-content: center;
   align-items: center;
+  grid-gap: .5em;
 }
 
 button:focus {
@@ -289,16 +292,17 @@ button:focus {
 
 .saveButton {
   height: 85%;
-  width: 100%;
+  width: 80%;
   display: flex;
   align-items: center;
   justify-content: center;
   background: none;
   color: var(--babypowder);
   border: 5px solid var(--default);
+  border-top-right-radius: 25px;
   background: url(./images/save-icon.svg), var(--default);
   background-repeat: no-repeat;
-  background-size: 55%;
+  background-size: 53%;
   background-position: 50% 50%;
   transition: 150ms ease-in-out;
 }
@@ -318,6 +322,7 @@ button:focus {
   background-size: 60%;
   background-position: 50% 50%;
   transition: 150ms ease-in-out;
+  border-bottom-right-radius: 25px;
 }
 
 .clearButton:active {
@@ -332,14 +337,17 @@ button:focus {
   margin: 2em auto;
   padding: .5em;
   width: 20%;
-  border: 5px solid var(--babypowder);
+  border: 4.5px solid var(--babypowder);
   font-size: 1.5em;
+  border-radius: 20px;
+  font-weight: 500;
+  font-style: italic;
 }
 
 .saveButton:active {
   background: url(./images/save-icon.svg),var(--null);
   background-repeat: no-repeat;
-  background-size: 55%;
+  background-size: 53%;
   background-position: 50% 50%;
   transition: 150ms ease-in-out;
 }

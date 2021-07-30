@@ -58,8 +58,8 @@ workDayHours.forEach(function(hour,index) {
         } // Appending Hour Rows
     hourRow.append($(`<input class="userInputField ${status} insetShadow" type="textarea" placeholder="Enter Event">`)); // Textarea Input
     hourRow.append($(`<div class="eventContainer ${status} insetShadow" id="hour${index}"></div>`)); // Creating Event Containers
-    buttonContainer.append('<button class="saveButton">'); // Creating Save Button
-    buttonContainer.append('<button class="clearButton"><i class="fas fa-times"></i>'); // Creating Clear Button
+    buttonContainer.append('<button class="saveButton insetShadow">'); // Creating Save Button
+    buttonContainer.append('<button class="clearButton insetShadow"><i class="fas fa-times"></i>'); // Creating Clear Button
     hourRow.append(buttonContainer);
     hourRowContainer.append(hourRow); // Append everything to the row, and append the row to the hour row container
 })
@@ -116,24 +116,25 @@ workDayHours.forEach(function(hour,index) {
      // Getting clear buttons
      var clearButton = $('.clearButton');
      clearButton.on('click',function(event) {
+         console.log($(event.currentTarget));
          // Clearing Events
-             if ($(event.target).parent().parent().data('hour') === 9) {
+             if ($(event.currentTarget).parent().parent().data('hour') === 9) {
                  localStorage.removeItem('Nine Events');
-             } else if ($(event.target).parent().parent().data('hour') === 10) {
+             } else if ($(event.currentTarget).parent().parent().data('hour') === 10) {
                 localStorage.removeItem('Ten Events');
-             } else if ($(event.target).parent().parent().data('hour') === 11) {
+             } else if ($(event.currentTarget).parent().parent().data('hour') === 11) {
                  localStorage.removeItem('Eleven Events');
-             } else if ($(event.target).parent().parent().data('hour') === 12) {
+             } else if ($(event.currentTarget).parent().parent().data('hour') === 12) {
                  localStorage.removeItem('Twelve Events');
-             } else if ($(event.target).parent().parent().data('hour') === 13) {
+             } else if ($(event.currentTarget).parent().parent().data('hour') === 13) {
                 localStorage.removeItem('One Events');
-             } else if ($(event.target).parent().parent().data('hour') === 14) {
+             } else if ($(event.currentTarget).parent().parent().data('hour') === 14) {
                 localStorage.removeItem('Two Events');
-             } else if ($(event.target).parent().parent().data('hour') === 15) {
+             } else if ($(event.currentTarget).parent().parent().data('hour') === 15) {
                  localStorage.removeItem('Three Events');
-             } else if ($(event.target).parent().parent().data('hour') === 16) {
+             } else if ($(event.currentTarget).parent().parent().data('hour') === 16) {
                  localStorage.removeItem('Four Events');
-             } else if ($(event.target).parent().parent().data('hour') === 17) {
+             } else if ($(event.currentTarget).parent().parent().data('hour') === 17) {
                  localStorage.removeItem('Five Events');
              }
              location.reload(true);
