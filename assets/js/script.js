@@ -5,6 +5,14 @@ console.log('Work Day Schedule!');
 var currentDay = $('#currentDay');
 var hourRowContainer = $('.hourRowsContainer');
 
+// Update Todays Time
+var today = moment().format('dddd, MMMM Do YYYY, h:mm:ss a');
+currentDay.html(today);
+var todayUpdate = setInterval(function() {
+    var today = moment().format('dddd, MMMM Do YYYY, h:mm:ss a');
+    currentDay.html(today);
+}, 1000);
+
 // Events
 var nineAmEvents = JSON.parse(localStorage.getItem("Nine Events")) || [];
 var tenAmEvents = JSON.parse(localStorage.getItem("Ten Events")) || [];
@@ -16,7 +24,7 @@ var threePmEvents = JSON.parse(localStorage.getItem("Three Events")) || [];
 var fourPmEvents = JSON.parse(localStorage.getItem("Four Events")) || [];
 var fivePmEvents = JSON.parse(localStorage.getItem("Five Events")) || [];
 
-// -----------------------------------Generating Dynamic Hour Rows -------------------------------- //
+// ------------------------------------------------Generating Dynamic Hour Rows --------------------------------------------- //
 
 // Hours in Work Day
 var timeFormat = 'h:mm a';
@@ -42,31 +50,28 @@ console.log('Work Day is: ' + startTime + ' through ' + endTime); // 9 am throug
 var status = '';
 workDayHours.forEach(function(hour,index) {
     var newIndex = index + 9;
-    var hourRow = $(`<div class="hourRow">
-    <span class="hour">${hour}</span>
-    </div>`); // Creating Hour Rows
-    hourRow.attr('data-hour',newIndex);
-    hourRow.attr('data-time',hour);
-    var buttonContainer = $('<div class="buttonContainer">');
-        // Time Detection
-        if (hourRow.data('hour') < moment().hours()) {
-            status = 'past'; // Below the current hour
-        } else if (hourRow.data('hour') === moment().hours()) {
-            status = 'present'; // If its the current hour
-        } else { // Everything Else
-            status = 'future';
-        } // Appending Hour Rows
-    hourRow.append($(`<input class="userInputField ${status} insetShadow" type="textarea" placeholder="Enter Event">`)); // Textarea Input
+    // Creating Hour Rows
+    var hourRow = $(`<div class="hourRow" data-hour="${newIndex}" data-time="${hour}"><span class="hour">${hour}</span></div>`);
+    // Time Detection
+    if (hourRow.data('hour') < moment().hours()) { // Below the current hour
+        status = 'past';
+    } else if (hourRow.data('hour') === moment().hours()) { // If its the current hour
+        status = 'present';
+    } else { // Everything Else
+        status = 'future';
+    } // Next, Creating & Appending Hour Rows
+    hourRow.append($(`<input class="userInputField ${status} insetShadow" type="textarea" placeholder="Enter Event">`)); // Input
     hourRow.append($(`<div class="eventContainer ${status} insetShadow" id="hour${index}"></div>`)); // Creating Event Containers
+    var buttonContainer = $('<div class="buttonContainer">');
     buttonContainer.append('<button class="saveButton insetShadow">'); // Creating Save Button
     buttonContainer.append('<button class="clearButton insetShadow"><i class="fas fa-times"></i>'); // Creating Clear Button
     hourRow.append(buttonContainer);
-    hourRowContainer.append(hourRow); // Append everything to the row, and append the row to the hour row container
+    hourRowContainer.append(hourRow); // Append everything to the row & append the rows to the hour row container
 })
 
-// -----------------------------------End Generating Dynamic Hour Rows -------------------------------- //
+// ------------------------------------------------End Generating Dynamic Hour Rows --------------------------------------------- //
 
-    // Checking if Input are in the past
+    // Checking if Input are in the past // Disable Input Textarea
     if ($('input.past')) {
         $('input.past').attr('placeholder','This Time has Passed');
         $('input.past').prop('disabled',true);
@@ -108,7 +113,7 @@ workDayHours.forEach(function(hour,index) {
             } else if ($(event.target).parent().parent().data('hour') === 17) {
                 fivePmEvents.push(eventInfo);
                 localStorage.setItem("Five Events",JSON.stringify(fivePmEvents));
-            }
+            } // Reloading Page After Messing With Local Storage to See Results
             location.reload(true);
         }
     })
@@ -136,76 +141,68 @@ workDayHours.forEach(function(hour,index) {
                  localStorage.removeItem('Four Events');
              } else if ($(event.currentTarget).parent().parent().data('hour') === 17) {
                  localStorage.removeItem('Five Events');
-             }
+             } // Reloading Page After Messing With Local Storage to See Results
              location.reload(true);
      })
-
-// Update Todays Time
-var today = moment().format('dddd, MMMM Do YYYY, h:mm:ss a');
-currentDay.html(today);
-var todayUpdate = setInterval(function() {
-    var today = moment().format('dddd, MMMM Do YYYY, h:mm:ss a');
-    currentDay.html(today);
-}, 1000);
-
-// Appending Stored Events from Local Storage for each Row
-nineAmEvents.forEach(event => {
-    var nineAmEventDivs = $('<div class="event">');
-    nineAmEventDivs.html('- ' + event);
-    $('#hour0').append(nineAmEventDivs);
-})
-
-tenAmEvents.forEach(event => {
-    var tenAmEventDivs = $('<div class="event">');
-    tenAmEventDivs.html('- ' + event);
-    $('#hour1').append(tenAmEventDivs);
-})
-
-elevenAmEvents.forEach(event => {
-    var elevenAmEventDivs = $('<div class="event">');
-    elevenAmEventDivs.html('- ' + event);
-    $('#hour2').append(elevenAmEventDivs);
-})
-
-twelvePmEvents.forEach(event => {
-    var twelvePmEventDivs = $('<div class="event">');
-    twelvePmEventDivs.html('- ' + event);
-    $('#hour3').append(twelvePmEventDivs);
-})
-
-onePmEvents.forEach(event => {
-    var onePmEventDivs = $('<div class="event">');
-    onePmEventDivs.html('- ' + event);
-    $('#hour4').append(onePmEventDivs);
-})
-
-twoPmEvents.forEach(event => {
-    var twoPmEventDivs = $('<div class="event">');
-    twoPmEventDivs.html('- ' + event);
-    $('#hour5').append(twoPmEventDivs);
-})
-
-threePmEvents.forEach(event => {
-    var threePmEventDivs = $('<div class="event">');
-    threePmEventDivs.html('- ' + event);
-    $('#hour6').append(threePmEventDivs);
-})
-
-fourPmEvents.forEach(event => {
-    var fourPmEventDivs = $('<div class="event">');
-    fourPmEventDivs.html('- ' + event);
-    $('#hour7').append(fourPmEventDivs);
-})
-
-fivePmEvents.forEach(event => {
-    var fivePmEventDivs = $('<div class="event">');
-    fivePmEventDivs.html('- ' + event);
-    $('#hour8').append(fivePmEventDivs);
-})
 
 // Clear Button Main
 var clearButtonMain = $('.clearButtonMax');
 clearButtonMain.on('click',function(event) {
     localStorage.clear();
     location.reload(true);
+})
+
+// Appending Stored Events from Local Storage for each Row
+nineAmEvents.forEach(event => {
+    var nineAmEventDivs = $('<div class="event">');
+    nineAmEventDivs.html(event);
+    $('#hour0').append(nineAmEventDivs);
+})
+
+tenAmEvents.forEach(event => {
+    var tenAmEventDivs = $('<div class="event">');
+    tenAmEventDivs.html(event);
+    $('#hour1').append(tenAmEventDivs);
+})
+
+elevenAmEvents.forEach(event => {
+    var elevenAmEventDivs = $('<div class="event">');
+    elevenAmEventDivs.html(event);
+    $('#hour2').append(elevenAmEventDivs);
+})
+
+twelvePmEvents.forEach(event => {
+    var twelvePmEventDivs = $('<div class="event">');
+    twelvePmEventDivs.html(event);
+    $('#hour3').append(twelvePmEventDivs);
+})
+
+onePmEvents.forEach(event => {
+    var onePmEventDivs = $('<div class="event">');
+    onePmEventDivs.html(event);
+    $('#hour4').append(onePmEventDivs);
+})
+
+twoPmEvents.forEach(event => {
+    var twoPmEventDivs = $('<div class="event">');
+    twoPmEventDivs.html(event);
+    $('#hour5').append(twoPmEventDivs);
+})
+
+threePmEvents.forEach(event => {
+    var threePmEventDivs = $('<div class="event">');
+    threePmEventDivs.html(event);
+    $('#hour6').append(threePmEventDivs);
+})
+
+fourPmEvents.forEach(event => {
+    var fourPmEventDivs = $('<div class="event">');
+    fourPmEventDivs.html(event);
+    $('#hour7').append(fourPmEventDivs);
+})
+
+fivePmEvents.forEach(event => {
+    var fivePmEventDivs = $('<div class="event">');
+    fivePmEventDivs.html(event);
+    $('#hour8').append(fivePmEventDivs);
 })

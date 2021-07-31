@@ -241,17 +241,18 @@ hr {
   background-position: 90% 50%;
   height: 100%;
   display: flex;
-  padding: 2em;
+  padding: 1em;
   align-items: flex-start;
   border: 5px solid var(--default);
   flex-direction: row;
   text-align: left;
-  justify-content: flex-start;
-  overflow-y: scroll;
+  justify-content: space-evenly;
+  overflow-y: auto;
   flex-wrap: wrap;
   font-size: .8em;
   font-style: italic;
-  width: 42%;
+  grid-gap: 10px;
+  width: 40%;
   font-weight: 600;
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
@@ -269,10 +270,22 @@ hr {
 }
 
 .event {
-  font-size: .9em;
+  font-size: .85em;
   font-style: italic;
-  width: 50%;
-  font-weight: 600;
+  width: 46%;
+  text-align: center;
+  font-weight: 500;
+  background: rgb(34 56 67 / 67%);
+  padding: .6em;
+  backdrop-filter: blur(2px);
+  border-radius: 25px;
+  color: var(--babypowder);
+  height: 2em;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  text-transform: capitalize;
 }
 
 .buttonContainer {
@@ -283,6 +296,7 @@ hr {
   justify-content: center;
   align-items: center;
   grid-gap: .5em;
+  padding: .3em;
 }
 
 button:focus {
