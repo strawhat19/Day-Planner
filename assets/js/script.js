@@ -71,13 +71,18 @@ workDayHours.forEach(function(hour,index) {
 
 // ------------------------------------------------End Generating Dynamic Hour Rows --------------------------------------------- //
 
-    // Checking if Input are in the past // Disable Input Textarea
-    if ($('input.past')) {
+    // Checking if Input are in the past
+    if ($('input.past')) { // Changing Place Holder Text
         $('input.past').attr('placeholder','This Time has Passed');
         $('input.past').prop('disabled',true);
-    }
+    } // Disable Input Textarea
 
-    // Getting inputs & buttons
+    // On Enter Key Press
+    $('input').keypress(function(event) { // The Key Code for 'Enter' is '13'
+        if (event.keyCode === 13) $(event.target).parent().find('.saveButton').click();
+    }) // If User Clicks Enter while inside the Input Field, Trigger Save Button Click Function Below
+
+    // Getting Inputs & Buttons // Save Button Function
     var saveButton = $('.saveButton');
     saveButton.on('click',function(event) {
         var eventInfo = $(event.target).parent().parent().children().eq(1).val();
@@ -118,7 +123,7 @@ workDayHours.forEach(function(hour,index) {
         }
     })
 
-     // Getting clear buttons
+     // Getting Clear Buttons
      var clearButton = $('.clearButton');
      clearButton.on('click',function(event) {
          console.log($(event.currentTarget));
@@ -206,3 +211,5 @@ fivePmEvents.forEach(event => {
     fivePmEventDivs.html(event);
     $('#hour8').append(fivePmEventDivs);
 })
+
+// End Script
